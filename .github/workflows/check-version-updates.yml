@@ -15,7 +15,10 @@ jobs:
     strategy:
       matrix:
         branch:
-          - go1.24-k8s1.32
+          - go1.26
+          - go1.25
+          - go1.25-k8s1.34
+          - go1.25-k8s1.33
       fail-fast: false
 
     steps:
