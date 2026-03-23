@@ -33,9 +33,6 @@ jobs:
           git show origin/master:hack/check-version-updates.sh > /tmp/check-version-updates.sh
           chmod +x /tmp/check-version-updates.sh
 
-      - name: Install yq
-        uses: mikefarah/yq@master
-
       - name: Check for version updates
         id: check-updates
         run: |
