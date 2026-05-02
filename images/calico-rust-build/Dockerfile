@@ -159,16 +159,4 @@ ENV RUSTUP_HOME=/usr/local/rustup
 ENV CARGO_HOME=/usr/local/cargo
 ENV PATH=/usr/local/cargo/bin:$PATH
 
-# Cross-compile env for the aarch64 target. Only consumed by cc-rs / bindgen
-# when cargo is invoked with --target=aarch64-unknown-linux-gnu.
-# Note: cc-rs auto-adds --target= when CC=clang, so we only set --sysroot
-# here. -fuse-ld=lld routes link steps through LLD (multi-arch capable);
-# the system /usr/bin/ld is x86_64-only and rejects aarch64 emulations.
-ENV CC_aarch64_unknown_linux_gnu=clang \
-    CXX_aarch64_unknown_linux_gnu=clang++ \
-    AR_aarch64_unknown_linux_gnu=aarch64-unknown-linux-gnu-ar \
-    CFLAGS_aarch64_unknown_linux_gnu="--sysroot=/usr/aarch64-linux-gnu/sys-root" \
-    CXXFLAGS_aarch64_unknown_linux_gnu="--sysroot=/usr/aarch64-linux-gnu/sys-root" \
-    BINDGEN_EXTRA_CLANG_ARGS_aarch64_unknown_linux_gnu="--target=aarch64-linux-gnu --sysroot=/usr/aarch64-linux-gnu/sys-root -I/usr/aarch64-linux-gnu/sys-root/usr/include"
-
 COPY --from=builder / /
